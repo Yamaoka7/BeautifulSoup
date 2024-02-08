@@ -1,0 +1,12 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.bbc.com/news"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+headlines = soup.find_all('h3', class_='gs-c-promo-heading__title')
+top_headlines = [headline.text.strip() for headline in headlines]
+
+print("Top News Headlines:")
+for i, headline in enumerate(top_headlines):
+    print(f"{i+1}. {headline}")
